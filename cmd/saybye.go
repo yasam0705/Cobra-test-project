@@ -11,18 +11,16 @@ var countNum int
 
 func init() {
 	countByCmd.Flags().IntVarP(&countNum, "count", "c", 1, "integer number")
-	sayByCmd.AddCommand(countByCmd)
-	rootCmd.AddCommand(sayByCmd)
+	sayByeCmd.AddCommand(countByCmd)
+	rootCmd.AddCommand(sayByeCmd)
 }
 
-var sayByCmd = &cobra.Command{
+var sayByeCmd = &cobra.Command{
 	Use:   "saybye [name string]",
 	Short: "Say bye",
 	Long:  "This command say bye user",
 	Args:  cobra.MinimumNArgs(1),
-	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("Bye", strings.Join(args, " "))
-	},
+	Run:   sayBye,
 }
 
 var countByCmd = &cobra.Command{
@@ -30,9 +28,15 @@ var countByCmd = &cobra.Command{
 	Short: "Count output text",
 	Long:  " ",
 	Args:  cobra.MinimumNArgs(1),
-	Run: func(cmd *cobra.Command, args []string) {
-		for i := 0; i < countNum; i++ {
-			fmt.Println("Bye", strings.Join(args, " "))
-		}
-	},
+	Run:   count,
+}
+
+func count(cmd *cobra.Command, args []string) {
+	for i := 0; i < countNum; i++ {
+		fmt.Println("Bye", strings.Join(args, " "))
+	}
+}
+
+func sayBye(cmd *cobra.Command, args []string) {
+	fmt.Println("Bye", strings.Join(args, " "))
 }

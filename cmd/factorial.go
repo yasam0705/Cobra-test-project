@@ -17,17 +17,19 @@ var factorialCmd = &cobra.Command{
 	Short: "Calculte factorial",
 	Long:  "Calculate factorial with for",
 	Args:  cobra.MinimumNArgs(1),
-	Run: func(cmd *cobra.Command, args []string) {
-		n, err := strconv.Atoi(args[0])
+	Run:   calculate,
+}
 
-		if err != nil {
-			fmt.Println(err)
-			os.Exit(1)
-		}
-		var result int = 1
-		for i := 1; i <= n; i++ {
-			result *= i
-		}
-		fmt.Printf("Factorial %d: %d\n", n, result)
-	},
+func calculate(cmd *cobra.Command, args []string) {
+	n, err := strconv.Atoi(args[0])
+
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+	var result int = 1
+	for i := 1; i <= n; i++ {
+		result *= i
+	}
+	fmt.Printf("Factorial %d: %d\n", n, result)
 }

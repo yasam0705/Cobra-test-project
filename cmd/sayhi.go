@@ -16,7 +16,9 @@ var sayHiCmd = &cobra.Command{
 	Short: "Say hi",
 	Long:  "This command say hi user",
 	Args:  cobra.MinimumNArgs(1),
-	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("Hi", strings.Join(args, " "))
-	},
+	Run:   sayHi,
+}
+
+func sayHi(cmd *cobra.Command, args []string) {
+	fmt.Println("Hi", strings.Join(args, " "))
 }
